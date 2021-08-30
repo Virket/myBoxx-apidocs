@@ -4,3 +4,5 @@
     - [Partner](/{{route}}/{{version}}/partner)
     - [Brand](/{{route}}/{{version}}/brand)
     - [Business](/{{route}}/{{version}}/business)
+- ## GMB Agency
+    - [GMB](/{{route}}/{{version}}/gmb)
