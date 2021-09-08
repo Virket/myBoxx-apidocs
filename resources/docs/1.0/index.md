@@ -6,3 +6,5 @@
     - [Business](/{{route}}/{{version}}/business)
 - ## GMB Agency
     - [GMB](/{{route}}/{{version}}/gmb)
+- ## MIT
+    - [Set Data](/{{route}}/{{version}}/mit)
