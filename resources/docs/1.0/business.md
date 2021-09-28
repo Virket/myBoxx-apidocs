@@ -4,21 +4,23 @@ Use this document reference to manage businesess.
 
 ---
 
-- [Business](#brand)
+- [Business](#business)
 	- [Create](#create)
+	- [List](#list)
 	- [Get](#single)
 	- [Update](#update)
 	- [Update info](#update-info)
-	- [Set images](#set-images)
-	- [Create website](#create-website)
-	- [Get User Business Token](#token)
+	- [Set image](#set-image)
+	- [Delete image](#delete-image)
+	- [Disable business](#disable)
+	- [Enable business](#enable)
 
 <a name="create"></a>
-## Create new User Business
+## Create new Business
 
 |Method|URI|Headers|
 |:-|:-|:-|
-|POST|`/api/json/v1/wizard/create_user`|default|
+|POST|`/api/json/v1/business/create`|Authorization {partner_token}|
 
 ### Data Params
 
@@ -27,12 +29,12 @@ Use this document reference to manage businesess.
     "last_name" : "required|string",
     "email" : "required|valid_email",
     "phone" : "required|numeric",
+    "business_name" : "required|string",
     "language" : "required|in_list:spanish,english",
     "password" : "required|string",
     "confirm_password" : "required|match_with_password",
     "country_code" : "required|Alpha-3 code",
-    "brand_id" : "required_unless:partner_id",
-    "partner_id" : "required_unless:brand_id"
+    "brand_id" : "required"
 ```
 
 > {success} Success Response
@@ -42,10 +44,13 @@ Code `200`
 ```json
 {
     "data": {
-        "id": 972,
-        "type": "wizard",
+        "id": 47,
+        "type": "business",
         "attributes": {
-            "token": "{user_business_token}"
+            "name": "John Doe",
+            "email": "user@example.com",
+            "business_name": "My Business",
+            "brand_id": "2"
         }
     }
 }
@@ -69,6 +74,7 @@ Reason `Bad Request`
             "last_name": "El campo last_name es requerido.",
             "email": "El campo email es requerido.",
             "phone": "El campo phone es requerido.",
+            "business_name": "El campo business_name es requerido.",
             "language": "El campo language es requerido.",
             "password": "El campo password es requerido.",
             "confirm_password": "El campo confirm_password es requerido.",
@@ -80,13 +86,70 @@ Reason `Bad Request`
 ```
 
 ---
+<a name="list"></a>
+## List all partner or brand businesses
+
+|Method|URI|Headers|
+|:-|:-|:-|
+|GET|`/api/json/v1/business/list`|Authorization {partner_token}|
+
+### Data Params
+
+```json
+	"brand_id" : "optional|numeric",
+```
+
+> {success} Success Response
+
+Code `200`
+
+```json
+{
+    "data": {
+        "id": "1",
+        "type": "business",
+        "attributes": [
+            {
+                "id": "47",
+                "name": "John Doe",
+                "brand_id": "2"
+            },
+            {
+                "id": "48",
+                "name": "Jane Doe",
+                "brand_id": "2"
+            }
+        ]
+    }
+}
+```
+
+-
+
+> {danger} Error Response
+
+Code `404`
+
+Reason `Not found`
+
+```json
+{
+    "errors": {
+        "status": 404,
+        "title": "List business error",
+        "detail": "Invalid brand"
+    }
+}
+```
+
+---
 
 <a name="single"></a>
 ## Get Business
 
 |Method|URI|Headers|
 |:-|:-|:-|
-|GET|`/api/json/v1/business/get/`|Authorization {user_business_token}|
+|GET|`/api/json/v1/business/get/{business_id}`|Authorization {partner_token}|
 
 ### Query Params
 
@@ -100,26 +163,26 @@ Code `200`
 
 ```json
 {
-  "data": {
-        "id": "1373",
+    "data": {
+        "id": "47",
         "type": "business",
         "attributes": {
-            "business_id": "1373",
-            "name": "Enrique Herrejón",
+            "business_id": "47",
+            "name": "John Dow",
             "wizard_finished_at": null,
-            "street_address": null,
-            "business_name": null,
-            "email": null,
-            "mobile_phone": null,
-            "phone": null,
-            "facebook_url": null,
-            "twitter_url": null,
-            "instagram_url": null,
-            "business_description": null,
-            "address_ext_number": null,
-            "address_int_number": null,
-            "latitude": null,
-            "longitude": null,
+            "street_address": "",
+            "business_name": "My Business",
+            "email": "",
+            "mobile_phone": "",
+            "phone": "",
+            "facebook_url": "",
+            "twitter_url": "",
+            "instagram_url": "",
+            "business_description": "",
+            "address_ext_number": "",
+            "address_int_number": "",
+            "latitude": "",
+            "longitude": "",
             "zipcode": null,
             "hours_of_operation": [
                 [],
@@ -135,9 +198,7 @@ Code `200`
             "products": [],
             "site_url": null,
             "images": [],
-            "country_code": "mex",
-            "country_calling_code": "52",
-            "language_code": "es"
+            "country_code": "mex"
         }
     }
 }
@@ -150,7 +211,7 @@ Code `200`
 
 |Method|URI|Headers|
 |:-|:-|:-|
-|POST|`/api/json/v1/business/update/`|Authorization {user_business_token}|
+|POST|`/api/json/v1/business/update/{business_id}`|Authorization {partner_token}|
 
 ### Data Params
 
@@ -184,11 +245,11 @@ Code `200`
 ```json
 {
   "data": {
-        "id": "1373",
+        "id": "47",
         "type": "business",
         "attributes": {
-            "business_id": "1373",
-            "name": "Enrique Herrejón",
+            "business_id": "47",
+            "name": "John Doe",
             "wizard_finished_at": "2021-08-11 13:38:08",
             "street_address": "Ventura Puente",
             "business_name": "Electronic K",
@@ -234,11 +295,11 @@ Code `200`
 ---
 
 <a name="update-info"></a>
-## Update business info
+## Update business info for GMB
 
 |Method|URI|Headers|
 |:-|:-|:-|
-|DELETE|`/api/json/v1/business/update_info/`|Authorization {user_business_token}|
+|POST|`/api/json/v1/business/update_info/{business_id}`|Authorization {partner_token}|
 
 ### Data Params
 
@@ -304,11 +365,11 @@ Code `200`
 ```json
 {
   "data": {
-        "id": "1373",
+        "id": "47",
         "type": "business",
         "attributes": {
-            "business_id": "1373",
-            "name": "Enrique Herrejón",
+            "business_id": "47",
+            "name": "John Doe",
             "wizard_finished_at": "2021-08-11 13:38:08",
             "street_address": "Ventura Puente",
             "business_name": "Electronic K",
@@ -385,12 +446,12 @@ Code `200`
 
 ---
 
-<a name="set-images"></a>
-## Set/update business images
+<a name="set-image"></a>
+## Set/update business image
 
 |Method|URI|Headers|
 |:-|:-|:-|
-|POST|`/api/json/v1/business/update_image`|Authorization {user_business_token}|
+|POST|`/api/json/v1/business/update_image/{business_id}`|Authorization {partner_token}|
 
 ### Data Params
 
@@ -408,10 +469,9 @@ Code `200`
 ```json
 {
     "data": {
-        "id": "16ed8457-b737-4223-b517-0b100a0b9da3",
+        "id": "47",
         "type": "business",
         "attributes": {
-            "business_id": "1373",
             "type": "gallery",
             "url": "https://boxx-crm.s3.amazonaws.com/gallery/gallery_1376_20210812124828.jpg",
             "index": "1"
@@ -447,7 +507,7 @@ Reason `Bad Request`
 
 |Method|URI|Headers|
 |:-|:-|:-|
-|POST|`/api/json/v1/business/delete_image`|Authorization {user_business_token}|
+|POST|`/api/json/v1/business/delete_image/{business_id}`|Authorization {partner_token}|
 
 ### Data Params
 
@@ -464,10 +524,9 @@ Code `200`
 ```json
 {
     "data": {
-        "id": "5cff1346-108f-461a-adaf-9ea6d551d2d6",
+        "id": "47",
         "type": "business",
         "attributes": {
-            "business_id": "1379",
             "type": "gallery",
             "index": "1"
         }
@@ -497,18 +556,13 @@ Reason `Bad Request`
 
 ---
 
-<a name="create-website"></a>
-## Create website
+<a name="disable"></a>
+## Disable business
 
 |Method|URI|Headers|
 |:-|:-|:-|
-|POST|`/api/json/v1/wizard/create_website`|Authorization {user_business_token}|
+|POST|`/api/json/v1/business/disable/{business_id}`|Authorization {partner_token}|
 
-### Data Params
-
-```json
-    
-```
 
 > {success} Success Response
 
@@ -517,52 +571,11 @@ Code `200`
 ```json
 {
     "data": {
-        "id": "1373",
-        "type": "wizard",
+        "id": "47",
+        "type": "business",
         "attributes": {
-            "business_id": "1373",
-            "title": "Electronic K",
-            "about": "All about audio and electronic devices",
-            "base_directory": "mexico/michoacan/morelia/ventura-puente/electronic-k",
-            "contact_email": "electronic_k@example.com",
-            "formatted_url": "https://devmultisites.virket.agency/mexico/michoacan/morelia/ventura-puente/electronic-k",
-            "keywords": null,
-            "deleted": false,
-            "modified": "2021-09-14 13:22:37",
-            "site_type": "agency_website",
-            "type": "agency",
-            "subdomain_alias": "electronic-k",
-            "added": "2021-09-14T13:22:33"
+            "title": "The site 47 has been disabled"
         }
-    }
-}
-```
-
----
-
-<a name="token"></a>
-## Get User Business Token
-
-|Method|URI|Headers|
-|:-|:-|:-|
-|POST|`/api/v2/auth/login`|default|
-
-### Data Params
-
-```json
-	"user" : "required|valid_email",
-    "password" : "required|string"
-```
-
-> {success} Success Response
-
-Code `200`
-
-```json
-{
-    "status": "success",
-    "data": {
-        "token": "{user_business_token}"
     }
 }
 ```
@@ -571,15 +584,59 @@ Code `200`
 
 > {danger} Error Response
 
-Code `401`
+Code `400`
 
-Reason `Unauthorized`
+Reason `Bad Request`
 
 ```json
 {
-    "status": "error",
-    "message": [
-        "Credenciales inválidas"
-    ]
+    "errors": {
+        "status": 400,
+        "title": "BAD REQUEST",
+        "detail": "Invalid business_id"
+    }
+}
+```
+---
+
+<a name="enable"></a>
+## Enable business
+
+|Method|URI|Headers|
+|:-|:-|:-|
+|POST|`/api/json/v1/business/enable/{business_id}`|Authorization {partner_token}|
+
+
+> {success} Success Response
+
+Code `200`
+
+```json
+{
+    "data": {
+        "id": "47",
+        "type": "business",
+        "attributes": {
+            "title": "The site 47 has been enabled"
+        }
+    }
+}
+```
+
+-
+
+> {danger} Error Response
+
+Code `400`
+
+Reason `Bad Request`
+
+```json
+{
+    "errors": {
+        "status": 400,
+        "title": "BAD REQUEST",
+        "detail": "Invalid business_id"
+    }
 }
 ```
