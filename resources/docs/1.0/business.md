@@ -8,6 +8,7 @@ Use this document reference to manage businesess.
 	- [Create](#create)
 	- [List](#list)
 	- [Get](#single)
+	- [Search](#search)
 	- [Update](#update)
 	- [Update info](#update-info)
 	- [Set image](#set-image)
@@ -34,7 +35,8 @@ Use this document reference to manage businesess.
     "password" : "required|string",
     "confirm_password" : "required|match_with_password",
     "country_code" : "required|Alpha-3 code",
-    "brand_id" : "required"
+    "brand_id" : "required",
+    "third_id" : "string"
 ```
 
 > {success} Success Response
@@ -48,7 +50,7 @@ Code `200`
         "type": "business",
         "attributes": {
             "name": "John Doe",
-            "email": "user@example.com",
+            "email": "johndoe@example.com",
             "business_name": "My Business",
             "brand_id": "2"
         }
@@ -70,16 +72,16 @@ Reason `Bad Request`
         "status": 400,
         "title": "Create business error",
         "detail": {
-            "name": "El campo name es requerido.",
-            "last_name": "El campo last_name es requerido.",
-            "email": "El campo email es requerido.",
-            "phone": "El campo phone es requerido.",
-            "business_name": "El campo business_name es requerido.",
-            "language": "El campo language es requerido.",
-            "password": "El campo password es requerido.",
-            "confirm_password": "El campo confirm_password es requerido.",
-            "country_code": "El campo country_code es requerido.",
-            "brand_id": "El campo brand_id es requerido."
+            "name": "required_field",
+            "last_name": "required_field",
+            "email": "required_field",
+            "phone": "required_field",
+            "business_name": "required_field",
+            "language": "required_field",
+            "password": "required_field",
+            "confirm_password": "required_field",
+            "country_code": "required_field",
+            "brand_id": "required_field"
         }
     }
 }
@@ -112,12 +114,16 @@ Code `200`
             {
                 "id": "47",
                 "name": "John Doe",
-                "brand_id": "2"
+                "brand_id": "2",
+                "account_status": "1",
+                "email": "johndoe@example.com"
             },
             {
                 "id": "48",
                 "name": "Jane Doe",
-                "brand_id": "2"
+                "brand_id": "2",
+                "account_status": "1",
+                "email": "janedoe@example.com"
             }
         ]
     }
@@ -137,7 +143,7 @@ Reason `Not found`
     "errors": {
         "status": 404,
         "title": "List business error",
-        "detail": "Invalid brand"
+        "detail": "invalid_request"
     }
 }
 ```
@@ -168,7 +174,7 @@ Code `200`
         "type": "business",
         "attributes": {
             "business_id": "47",
-            "name": "John Dow",
+            "name": "John Doe",
             "wizard_finished_at": null,
             "street_address": "",
             "business_name": "My Business",
@@ -198,8 +204,92 @@ Code `200`
             "products": [],
             "site_url": null,
             "images": [],
-            "country_code": "mex"
+            "country_code": "mex",
+            "account_status": "1",
+            "third_id": "123"
         }
+    }
+}
+```
+
+---
+<a name="search"></a>
+## Search by third_id or email
+
+|Method|URI|Headers|
+|:-|:-|:-|
+|GET|`/api/json/v1/business/get`|Authorization {partner_token}|
+
+### Data Params
+
+```json
+	"third_id" : "optional|string",
+    "email" : "optional|valid_email"
+```
+
+> {success} Success Response
+
+Code `200`
+
+```json
+{
+    "data": {
+        "id": "47",
+        "type": "business",
+        "attributes": {
+            "business_id": "47",
+            "name": "John Doe",
+            "wizard_finished_at": null,
+            "street_address": "",
+            "business_name": "My Business",
+            "email": "",
+            "mobile_phone": "",
+            "phone": "",
+            "facebook_url": "",
+            "twitter_url": "",
+            "instagram_url": "",
+            "business_description": "",
+            "address_ext_number": "",
+            "address_int_number": "",
+            "latitude": "",
+            "longitude": "",
+            "zipcode": null,
+            "hours_of_operation": [
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                []
+            ],
+            "hours_of_operation_notes": null,
+            "payment_methods": [],
+            "products": [],
+            "site_url": null,
+            "images": [],
+            "country_code": "mex",
+            "account_status": "1",
+            "third_id": "123"
+        }
+    }
+}
+```
+
+-
+
+> {danger} Error Response
+
+Code `400`
+
+Reason `Bad Request`
+
+```json
+{
+  "errors": {
+        "status": 404,
+        "title": "Business get error",
+        "detail": "business_not_found"
     }
 }
 ```
@@ -235,7 +325,8 @@ Code `200`
     "latitude" : "numeric",
     "longitude" : "numeric",
     "extra_site_url" : "string",
-    "template_id" : "numeric"
+    "template_id" : "numeric",
+    "third_id" : "string"
 ```
 
 > {success} Success Response
@@ -286,7 +377,9 @@ Code `200`
             "template_id": "3",
             "brand_id": "2",
             "extra_site_url": "https://electronic-k.com",
-            "country_code": "mex"
+            "country_code": "mex",
+            "account_status": "1",
+            "third_id": "123"
         }
     }
 }
@@ -438,7 +531,9 @@ Code `200`
             "template_id": "3",
             "brand_id": "2",
             "extra_site_url": "https://electronic-k.com",
-            "country_code": "mex"
+            "country_code": "mex",
+            "account_status": "1",
+            "third_id": "123"
         }
     }
 }
@@ -494,7 +589,7 @@ Reason `Bad Request`
         "status": 400,
         "title": "Business image update error",
         "detail": {
-            "container": "El campo container es requerido."
+            "container": "required_field"
         }
     }
 }
@@ -548,7 +643,7 @@ Reason `Bad Request`
         "status": 400,
         "title": "Business image update error",
         "detail": {
-            "container": "El campo container es requerido."
+            "container": "required_field"
         }
     }
 }
@@ -574,7 +669,7 @@ Code `200`
         "id": "47",
         "type": "business",
         "attributes": {
-            "title": "The site 47 has been disabled"
+            "title": "business_disabled"
         }
     }
 }
@@ -593,7 +688,7 @@ Reason `Bad Request`
     "errors": {
         "status": 400,
         "title": "BAD REQUEST",
-        "detail": "Invalid business_id"
+        "detail": "invalid_business_id"
     }
 }
 ```
@@ -617,7 +712,7 @@ Code `200`
         "id": "47",
         "type": "business",
         "attributes": {
-            "title": "The site 47 has been enabled"
+            "title": "business_enabled"
         }
     }
 }
@@ -636,7 +731,7 @@ Reason `Bad Request`
     "errors": {
         "status": 400,
         "title": "BAD REQUEST",
-        "detail": "Invalid business_id"
+        "detail": "invalid_business_id"
     }
 }
 ```
