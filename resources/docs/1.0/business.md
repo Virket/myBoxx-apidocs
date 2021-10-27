@@ -7,14 +7,14 @@ Use this document reference to manage businesess.
 - [Business](#business)
 	- [Create](#create)
 	- [List](#list)
-	- [Get](#single)
-	- [Search](#search)
+	- [Get](#get)
 	- [Update](#update)
 	- [Update info](#update-info)
-	- [Set image](#set-image)
+    - [Set image](#set-image)
 	- [Delete image](#delete-image)
-	- [Disable business](#disable)
-	- [Enable business](#enable)
+    - [Disable](#disable)
+	- [Enable](#enable)
+	- [Delete](#delete)
 
 <a name="create"></a>
 ## Create new Business
@@ -62,15 +62,15 @@ Code `200`
 
 > {danger} Error Response
 
-Code `400`
+Code `412`
 
-Reason `Bad Request`
+Reason `Precondition Failed`
 
 ```json
 {
   "errors": {
-        "status": 400,
-        "title": "Create business error",
+        "status": 412,
+        "title": "Validation error",
         "detail": {
             "name": "required_field",
             "last_name": "required_field",
@@ -116,7 +116,8 @@ Code `200`
                 "name": "John Doe",
                 "brand_id": "2",
                 "account_status": "1",
-                "email": "johndoe@example.com"
+                "email": "johndoe@example.com",
+                "third_id": "johndoe@example.com"
             },
             {
                 "id": "48",
@@ -134,23 +135,23 @@ Code `200`
 
 > {danger} Error Response
 
-Code `404`
+Code `403`
 
-Reason `Not found`
+Reason `Unauthorized`
 
 ```json
 {
     "errors": {
-        "status": 404,
+        "status": 403,
         "title": "List business error",
-        "detail": "invalid_request"
+        "detail": "unauthorized"
     }
 }
 ```
 
 ---
 
-<a name="single"></a>
+<a name="get"></a>
 ## Get Business
 
 |Method|URI|Headers|
@@ -212,9 +213,27 @@ Code `200`
 }
 ```
 
+-
+
+> {danger} Error Response
+
+Code `404`
+
+Reason `Not found`
+
+```json
+{
+  "errors": {
+        "status": 404,
+        "title": "Business get error",
+        "detail": "business_not_found"
+    }
+}
+```
+
 ---
-<a name="search"></a>
-## Search by third_id or email
+<a name="get-by-third-id"></a>
+## Get by third_id or email
 
 |Method|URI|Headers|
 |:-|:-|:-|
@@ -280,9 +299,9 @@ Code `200`
 
 > {danger} Error Response
 
-Code `400`
+Code `404`
 
-Reason `Bad Request`
+Reason `Not found`
 
 ```json
 {
@@ -579,14 +598,14 @@ Code `200`
 
 > {danger} Error Response
 
-Code `400`
+Code `412`
 
-Reason `Bad Request`
+Reason `Precondition Failed`
 
 ```json
 {
     "errors": {
-        "status": 400,
+        "status": 412,
         "title": "Business image update error",
         "detail": {
             "container": "required_field"
@@ -633,14 +652,14 @@ Code `200`
 
 > {danger} Error Response
 
-Code `400`
+Code `412`
 
-Reason `Bad Request`
+Reason `Precondition Failed`
 
 ```json
 {
     "errors": {
-        "status": 400,
+        "status": 412,
         "title": "Business image update error",
         "detail": {
             "container": "required_field"
@@ -656,7 +675,7 @@ Reason `Bad Request`
 
 |Method|URI|Headers|
 |:-|:-|:-|
-|POST|`/api/json/v1/business/disable/{business_id}`|Authorization {partner_token}|
+|GET|`/api/json/v1/business/disable/{business_id}`|Authorization {partner_token}|
 
 
 > {success} Success Response
@@ -679,16 +698,64 @@ Code `200`
 
 > {danger} Error Response
 
-Code `400`
+Code `403`
 
-Reason `Bad Request`
+Reason `Unauthorized`
 
 ```json
 {
-    "errors": {
-        "status": 400,
+  "errors": {
+        "status": 403,
         "title": "BAD REQUEST",
-        "detail": "invalid_business_id"
+        "detail": "unauthorized"
+    }
+}
+```
+
+<a name="disable-by-third-id"></a>
+## Disable business by third id or email
+
+|Method|URI|Headers|
+|:-|:-|:-|
+|GET|`/api/json/v1/business/disable/`|Authorization {partner_token}|
+
+### Query Params
+
+```json
+    "third_id" : "optional|string",
+    "email" : "optional|valid_email"
+```
+
+> {success} Success Response
+
+Code `200`
+
+```json
+{
+    "data": {
+        "id": "47",
+        "type": "business",
+        "attributes": {
+            "title": "business_disabled"
+        }
+    }
+}
+```
+
+-
+
+> {danger} Error Response
+
+Code `403`
+
+Reason `Unauthorized`
+
+```json
+{
+  "errors": {
+        "status": 403,
+        "title": "BAD REQUEST",
+        "detail": "unauthorized"
     }
 }
 ```
@@ -699,7 +766,7 @@ Reason `Bad Request`
 
 |Method|URI|Headers|
 |:-|:-|:-|
-|POST|`/api/json/v1/business/enable/{business_id}`|Authorization {partner_token}|
+|GET|`/api/json/v1/business/enable/{business_id}`|Authorization {partner_token}|
 
 
 > {success} Success Response
@@ -722,16 +789,156 @@ Code `200`
 
 > {danger} Error Response
 
-Code `400`
+Code `403`
 
-Reason `Bad Request`
+Reason `Unauthorized`
 
 ```json
 {
-    "errors": {
-        "status": 400,
+  "errors": {
+        "status": 403,
         "title": "BAD REQUEST",
-        "detail": "invalid_business_id"
+        "detail": "unauthorized"
+    }
+}
+```
+---
+
+<a name="enable-by-third-id"></a>
+## Enable business by third_id or email
+
+|Method|URI|Headers|
+|:-|:-|:-|
+|GET|`/api/json/v1/business/enable/`|Authorization {partner_token}|
+### Query Params
+
+```json
+    "third_id" : "optional|string",
+    "email" : "optional|valid_email"
+```
+
+
+> {success} Success Response
+
+Code `200`
+
+```json
+{
+    "data": {
+        "id": "47",
+        "type": "business",
+        "attributes": {
+            "title": "business_enabled"
+        }
+    }
+}
+```
+
+-
+
+> {danger} Error Response
+
+Code `403`
+
+Reason `Unauthorized`
+
+```json
+{
+  "errors": {
+        "status": 403,
+        "title": "BAD REQUEST",
+        "detail": "unauthorized"
+    }
+}
+```
+---
+<a name="delete"></a>
+## Delete business
+
+|Method|URI|Headers|
+|:-|:-|:-|
+|DELETE|`/api/json/v1/business/delete/{business_id}`|Authorization {partner_token}|
+
+
+> {success} Success Response
+
+Code `200`
+
+```json
+{
+    "data": {
+        "id": "47",
+        "type": "business",
+        "attributes": {
+            "title": "business_deleted"
+        }
+    }
+}
+```
+
+-
+
+> {danger} Error Response
+
+Code `403`
+
+Reason `Unauthorized`
+
+```json
+{
+  "errors": {
+        "status": 403,
+        "title": "BAD REQUEST",
+        "detail": "unauthorized"
+    }
+}
+```
+---
+
+<a name="delete-by-third-id"></a>
+## Delete business by third_id or email
+
+|Method|URI|Headers|
+|:-|:-|:-|
+|GET|`/api/json/v1/business/delete/`|Authorization {partner_token}|
+### Query Params
+
+```json
+    "third_id" : "optional|string",
+    "email" : "optional|valid_email"
+```
+
+
+> {success} Success Response
+
+Code `200`
+
+```json
+{
+    "data": {
+        "id": "47",
+        "type": "business",
+        "attributes": {
+            "title": "business_deleted"
+        }
+    }
+}
+```
+
+-
+
+> {danger} Error Response
+
+Code `403`
+
+Reason `Unauthorized`
+
+```json
+{
+  "errors": {
+        "status": 403,
+        "title": "BAD REQUEST",
+        "detail": "unauthorized"
     }
 }
 ```
