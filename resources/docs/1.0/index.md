@@ -8,3 +8,10 @@
     - [GMB](/{{route}}/{{version}}/gmb)
 - ## MIT
     - [Set Data](/{{route}}/{{version}}/mit)
+- ## Ecwid
+    - [Auth](/{{route}}/{{version}}/eauth)
+    - [Products](/{{route}}/{{version}}/eproducts)
+    - [Orders](/{{route}}/{{version}}/eorders)
+    - [Carts](/{{route}}/{{version}}/ecarts)
+    - [Customers](/{{route}}/{{version}}/ecustomers)
+    - [Categories](/{{route}}/{{version}}/ecategories)
