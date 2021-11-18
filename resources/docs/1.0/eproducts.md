@@ -1,4 +1,4 @@
-# Auth Documentation
+# Products Documentation
 
 Use this document reference to products methods.
 
