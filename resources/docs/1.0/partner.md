@@ -49,6 +49,7 @@ Code `200`
 ```
 > {info} <a href="https://paw.pt/gb7BhgyV" target="_blank">Paw Print</a>
 
+
 -
 
 > {danger} Error Response
