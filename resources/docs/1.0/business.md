@@ -37,6 +37,7 @@ Use this document reference to manage businesess.
     "country_code" : "required|Alpha-3 code",
     "brand_id" : "required",
     "third_id" : "string"
+    "sku" : "string"
 ```
 
 > {success} Success Response
@@ -53,6 +54,15 @@ Code `200`
             "email": "johndoe@example.com",
             "business_name": "My Business",
             "brand_id": "2"
+        },
+        "meta":{
+            "suscripcion":{
+                "id": "4",
+                "business_id": "7",
+                "status": "active",
+                "start_date": "2021-11-04",
+                "expire_date": "2021-12-04"
+            }
         }
     }
 }
