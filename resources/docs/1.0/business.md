@@ -8,13 +8,16 @@ Use this document reference to manage businesess.
 	- [Create](#create)
 	- [List](#list)
 	- [Get](#get)
+	    - [Search](#search)
 	- [Update](#update)
-	- [Update info](#update-info)
     - [Set image](#set-image)
 	- [Delete image](#delete-image)
     - [Disable](#disable)
+	    - [Enable by](#disable-by)
 	- [Enable](#enable)
+	    - [Enable by](#enable-by)
 	- [Delete](#delete)
+	    - [Delete by](#delete-by)
 
 <a name="create"></a>
 ## Create new Business
@@ -26,15 +29,15 @@ Use this document reference to manage businesess.
 ### Data Params
 
 ```json
-	"name" : "required|string",
-    "last_name" : "required|string",
-    "email" : "required|valid_email",
-    "phone" : "required|numeric",
-    "business_name" : "required|string",
-    "language" : "required|in_list:spanish,english",
-    "password" : "required|string",
-    "confirm_password" : "required|match_with_password",
-    "country_code" : "required|Alpha-3 code",
+	"name" : "required | string",
+    "last_name" : "required | string",
+    "email" : "required | valid_email",
+    "phone" : "required | numeric",
+    "business_name" : "required | string",
+    "language" : "required | in_list:spanish,english",
+    "password" : "required | string",
+    "confirm_password" : "required | match_with_password",
+    "country_code" : "required | Alpha-3_code",
     "brand_id" : "required",
     "third_id" : "string"
     "sku" : "string"
@@ -50,18 +53,26 @@ Code `200`
         "id": 47,
         "type": "business",
         "attributes": {
-            "name": "John Doe",
-            "email": "johndoe@example.com",
-            "business_name": "My Business",
-            "brand_id": "2"
+            "business_name": "Abogados",
+            "brand_id": "1"
         },
-        "meta":{
-            "suscripcion":{
-                "id": "4",
-                "business_id": "7",
-                "status": "active",
-                "start_date": "2021-11-04",
-                "expire_date": "2021-12-04"
+        "meta": {
+            "user": {
+                "id": "1694",
+                "name": "John Doe",
+                "email": "johndoe@example.com",
+                "phone": "0094867437",
+                "language": "spanish",
+                "account_status": "1"
+            },
+            "suscripcion": {
+                "id": "2",
+                "name": "Comienza",
+                "sku": "PQ1",
+                "type": "brand",
+                "created_at": "2021-10-19 13:47:01",
+                "updated_at": "2021-10-19 13:50:34",
+                "idenify_id": "1"
             }
         }
     }
@@ -123,18 +134,31 @@ Code `200`
         "attributes": [
             {
                 "id": "47",
-                "name": "John Doe",
+                "business_name": "My Business",
                 "brand_id": "2",
-                "account_status": "1",
-                "email": "johndoe@example.com",
-                "third_id": "johndoe@example.com"
+                "domain": "example-domain.com",
+                "user": {
+                    "id": "1694",
+                    "name": "John Doe",
+                    "email": "johndoe@example.com",
+                    "phone": "8246283642",
+                    "language": "spanish",
+                    "account_status": "1"
+                }
             },
             {
                 "id": "48",
-                "name": "Jane Doe",
+                "business_name": "My Business",
                 "brand_id": "2",
-                "account_status": "1",
-                "email": "janedoe@example.com"
+                "domain": null,
+                "user": {
+                    "id": "1695",
+                    "name": "Jane Doe",
+                    "email": "janedoe@example.com",
+                    "phone": "2934298734",
+                    "language": "spanish",
+                    "account_status": "1"
+                }
             }
         ]
     }
@@ -185,13 +209,13 @@ Code `200`
         "type": "business",
         "attributes": {
             "business_id": "47",
-            "name": "John Doe",
+            "domain": "exampledomain.com",
             "wizard_finished_at": null,
             "street_address": "",
             "business_name": "My Business",
-            "email": "",
+            "business_email": "",
             "mobile_phone": "",
-            "phone": "",
+            "phone": "0094867437",
             "facebook_url": "",
             "twitter_url": "",
             "instagram_url": "",
@@ -213,11 +237,58 @@ Code `200`
             "hours_of_operation_notes": null,
             "payment_methods": [],
             "products": [],
-            "site_url": null,
+            "full_address": "",
             "images": [],
-            "country_code": "mex",
-            "account_status": "1",
-            "third_id": "123"
+            "country_calling_code": "52",
+            "site_url": "http://exampledomain.com"
+        },
+        "meta": {
+            "user": {
+                "id": "1694",
+                "name": "John Doe",
+                "email": "johndoe@example.com",
+                "phone": "0094867437",
+                "language": "spanish",
+                "account_status": "1"
+            },
+            "suscripcion": {
+                "id": "2",
+                "name": "Comienza",
+                "sku": "PQ1",
+                "type": "brand",
+                "created_at": "2021-10-19 13:47:01",
+                "updated_at": "2021-10-19 13:50:34",
+                "idenify_id": "1"
+            },
+            "permiso": {
+                "Comienza": [
+                    "contactsModule",
+                    "contactsList",
+                    "contactDetail",
+                    "contactCreate",
+                    "contactImport",
+                    "contactEdit",
+                    "contactDelete",
+                    "contactAddToEvent",
+                    "eventsModule",
+                    "inboxxReviewList",
+                    "listingSyncModule",
+                    "listingSyncSite",
+                    "listingSyncModule",
+                    "listingSyncGmb",
+                    "listingSyncModule",
+                    "listingSyncBizDir"
+                ]
+            },
+            "calificacion": [],
+            "BUSINESS_CONFIG_SERVICES": false,
+            "BUSINESS_CONFIG_PAYMENTS": false,
+            "BUSINESS_CONFIG_SCHEDULE": false,
+            "BUSINESS_CONFIG_SOCIAL": false,
+            "BUSINESS_CONFIG_WEBSITE": false,
+            "BUSINESS_CONFIG_NOTIFICATIONS": false,
+            "USER_HAS_GMB_ACCOUNT": false,
+            "BUSINESS_CONFIG_GMB_STATUS": false
         }
     }
 }
@@ -242,8 +313,8 @@ Reason `Not found`
 ```
 
 ---
-<a name="get-by-third-id"></a>
-## Get by third_id or email
+<a name="search"></a>
+## Search business by third_id or email
 
 |Method|URI|Headers|
 |:-|:-|:-|
@@ -267,13 +338,13 @@ Code `200`
         "type": "business",
         "attributes": {
             "business_id": "47",
-            "name": "John Doe",
+            "domain": "exampledomain.com",
             "wizard_finished_at": null,
             "street_address": "",
             "business_name": "My Business",
-            "email": "",
+            "business_email": "",
             "mobile_phone": "",
-            "phone": "",
+            "phone": "0094867437",
             "facebook_url": "",
             "twitter_url": "",
             "instagram_url": "",
@@ -295,11 +366,58 @@ Code `200`
             "hours_of_operation_notes": null,
             "payment_methods": [],
             "products": [],
-            "site_url": null,
+            "full_address": "",
             "images": [],
-            "country_code": "mex",
-            "account_status": "1",
-            "third_id": "123"
+            "country_calling_code": "52",
+            "site_url": "http://exampledomain.com"
+        },
+        "meta": {
+            "user": {
+                "id": "1694",
+                "name": "John Doe",
+                "email": "johndoe@example.com",
+                "phone": "0094867437",
+                "language": "spanish",
+                "account_status": "1"
+            },
+            "suscripcion": {
+                "id": "2",
+                "name": "Comienza",
+                "sku": "PQ1",
+                "type": "brand",
+                "created_at": "2021-10-19 13:47:01",
+                "updated_at": "2021-10-19 13:50:34",
+                "idenify_id": "1"
+            },
+            "permiso": {
+                "Comienza": [
+                    "contactsModule",
+                    "contactsList",
+                    "contactDetail",
+                    "contactCreate",
+                    "contactImport",
+                    "contactEdit",
+                    "contactDelete",
+                    "contactAddToEvent",
+                    "eventsModule",
+                    "inboxxReviewList",
+                    "listingSyncModule",
+                    "listingSyncSite",
+                    "listingSyncModule",
+                    "listingSyncGmb",
+                    "listingSyncModule",
+                    "listingSyncBizDir"
+                ]
+            },
+            "calificacion": [],
+            "BUSINESS_CONFIG_SERVICES": false,
+            "BUSINESS_CONFIG_PAYMENTS": false,
+            "BUSINESS_CONFIG_SCHEDULE": false,
+            "BUSINESS_CONFIG_SOCIAL": false,
+            "BUSINESS_CONFIG_WEBSITE": false,
+            "BUSINESS_CONFIG_NOTIFICATIONS": false,
+            "USER_HAS_GMB_ACCOUNT": false,
+            "BUSINESS_CONFIG_GMB_STATUS": false
         }
     }
 }
@@ -326,7 +444,7 @@ Reason `Not found`
 ---
 
 <a name="update"></a>
-## Update Business main data
+## Update Business
 
 |Method|URI|Headers|
 |:-|:-|:-|
@@ -337,12 +455,12 @@ Reason `Not found`
 ```json
 	"business_name" : "string",
     "business_description" : "string",
-    "email" : "valid_email",
+    "business_email" : "valid_email",
+    "third_id" : "string"
+    "domain" : "string"
+    "sku" : "string"
     "phone" : "numeric",
     "mobile_phone" : "numeric",
-    "facebook_url" : "string|valid_url",
-    "twitter_url" : "string|valid_url",
-    "instagram_url" : "string|valid_url",
     "street_address" : "string",
     "address_ext_number" : "string",
     "address_int_number" : "string",
@@ -355,128 +473,35 @@ Reason `Not found`
     "longitude" : "numeric",
     "extra_site_url" : "string",
     "template_id" : "numeric",
-    "third_id" : "string"
-```
-
-> {success} Success Response
-
-Code `200`
-
-```json
-{
-  "data": {
-        "id": "47",
-        "type": "business",
-        "attributes": {
-            "business_id": "47",
-            "name": "John Doe",
-            "wizard_finished_at": "2021-08-11 13:38:08",
-            "street_address": "Ventura Puente",
-            "business_name": "Electronic K",
-            "email": "electronic_k@example.com",
-            "mobile_phone": "8786688443",
-            "phone": "5632147890",
-            "facebook_url": "https://facebook.com/fakeelectronic_k",
-            "twitter_url": "https://twitter.com/fakeelectronic_k",
-            "instagram_url": "https://instagram.com/fakeelectronic_k",
-            "business_description": "All about audio and electronic devices",
-            "address_ext_number": "123",
-            "address_int_number": "",
-            "latitude": "20.671962",
-            "longitude": "-103.2863647",
-            "zipcode": "58000",
-            "hours_of_operation": [
-                [],
-                [],
-                [],
-                [],
-                [],
-                [],
-                []
-            ],
-            "hours_of_operation_notes": null,
-            "payment_methods": [],
-            "products": [],
-            "site_url": null,
-            "images": [],
-            "settlement": "Ventura Puente",
-            "locality": "Morelia",
-            "state": "Michoacán",
-            "country": "México",
-            "template_id": "3",
-            "brand_id": "2",
-            "extra_site_url": "https://electronic-k.com",
-            "country_code": "mex",
-            "account_status": "1",
-            "third_id": "123"
-        }
-    }
-}
-```
-
----
-
-<a name="update-info"></a>
-## Update business info for GMB
-
-|Method|URI|Headers|
-|:-|:-|:-|
-|POST|`/api/json/v1/business/update_info/{business_id}`|Authorization {partner_token}|
-
-### Data Params
-
-```json
-	"products" : "array",
+    "facebook_url" : "string | valid_url",
+    "twitter_url" : "string | valid_url",
+    "instagram_url" : "string | valid_url",
+    "products" : "array",
 	"payment_methods" : "array",
 	"schedule" : "array",
 	"schedule_notes" : "string"
 ```
-
-### Example
+### Array Data Params examples
 ```json
-	"products" : [
-        "Electronic components",
-        "Audio equipment"
-    ],
-	"payment_methods" : [
-        "Visa",
-        "MasterCard"
-    ],
+    "products" : ["Product 1","Product 2","Product 3"],
+	"payment_methods" : ["Efectivo","Visa","MasterCard"],
 	"schedule" : [
-        [["09:00:00", "21:00:00"]],
+        [],
+        [["19:00:00", "20:00:00"]],
         [["09:00:00", "20:00:00"]],
         [["09:00:00", "20:00:00"]],
-        [["09:00:00", "20:00:00"]],
-        [["09:00:00", "20:00:00"]],
+        [["21:00:00", "20:00:00"]],
         [],
         []
-    ],
-	"schedule_notes" : "Closed on festive days"
+    ]
 ```
-
 ### Example 24 hours
 ```json
-	"products" : [
-        "Electronic components",
-        "Audio equipment"
-    ],
-	"payment_methods" : [
-        "Visa",
-        "MasterCard"
-    ],
 	"schedule" : ["24_HOURS"]
 ```
 
 ### Example No schedule
 ```json
-	"products" : [
-        "Electronic components",
-        "Audio equipment"
-    ],
-	"payment_methods" : [
-        "Visa",
-        "MasterCard"
-    ],
 	"schedule" : ["NO_HOURS"]
 ```
 
@@ -486,37 +511,32 @@ Code `200`
 
 ```json
 {
-  "data": {
+    "data": {
         "id": "47",
         "type": "business",
         "attributes": {
             "business_id": "47",
-            "name": "John Doe",
-            "wizard_finished_at": "2021-08-11 13:38:08",
-            "street_address": "Ventura Puente",
-            "business_name": "Electronic K",
-            "email": "electronic_k@example.com",
-            "mobile_phone": "8786688443",
-            "phone": "5632147890",
-            "facebook_url": "https://facebook.com/fakeelectronic_k",
-            "twitter_url": "https://twitter.com/fakeelectronic_k",
-            "instagram_url": "https://instagram.com/fakeelectronic_k",
-            "business_description": "All about audio and electronic devices",
-            "address_ext_number": "123",
+            "domain": null,
+            "wizard_finished_at": "2022-02-10 10:53:43",
+            "street_address": "Calle 10",
+            "business_name": "My Business",
+            "business_email": "mybusiness@example.com",
+            "mobile_phone": "9512357666",
+            "phone": "855474999",
+            "facebook_url": "https://facebook.com/fakebusiness",
+            "twitter_url": "https://twitter.com/fakebusiness",
+            "instagram_url": "https://instagram.com/fakebusiness",
+            "business_description": "Business Desc",
+            "address_ext_number": "166",
             "address_int_number": "",
-            "latitude": "20.671962",
-            "longitude": "-103.2863647",
-            "zipcode": "58000",
+            "latitude": "19.98660323976677",
+            "longitude": "-88.67270045744931",
+            "zipcode": "75700",
             "hours_of_operation": [
+                [],
                 [
                     [
-                        "09:00:00",
-                        "21:00:00"
-                    ]
-                ],
-                [
-                    [
-                        "09:00:00",
+                        "19:00:00",
                         "20:00:00"
                     ]
                 ],
@@ -534,35 +554,86 @@ Code `200`
                 ],
                 [
                     [
-                        "09:00:00",
+                        "21:00:00",
                         "20:00:00"
                     ]
                 ],
                 [],
                 []
             ],
-            "hours_of_operation_notes": "Closed on festive days",
+            "hours_of_operation_notes": "Cerramos diías festivos",
             "payment_methods": [
+                "Efectivo",
                 "Visa",
                 "MasterCard"
             ],
             "products": [
-                "Electronic components",
-                "Audio equipment",
-                "Arduino"
+                "Product 1",
+                "Product 2",
+                "Product 3"
             ],
-            "site_url": "https://devmultisites.virket.agency/mexico/michoacan/morelia/ventura-puente/electronic-k",
-            "images": [],
-            "settlement": "Ventura Puente",
-            "locality": "Morelia",
-            "state": "Michoacán",
+            "country_calling_code": "52",
+            "settlement": "Las flores",
+            "locality": "Tehuacan",
+            "state": "Puebla",
             "country": "México",
-            "template_id": "3",
-            "brand_id": "2",
-            "extra_site_url": "https://electronic-k.com",
-            "country_code": "mex",
-            "account_status": "1",
-            "third_id": "123"
+            "template_id": "30",
+            "site_url": "https://devmultisites.virket.agency/mexico/puebla/tehuacan/las-flores/estudio-fotografico-cris"
+        },
+        "meta": {
+            "user": {
+                "id": "1694",
+                "name": "John Doe",
+                "email": "johndoe@example.com",
+                "phone": "0094867437",
+                "language": "spanish",
+                "account_status": "1"
+            },
+            "suscripcion": {
+                "id": "4",
+                "name": "Deleita",
+                "sku": "PQ3",
+                "type": "brand",
+                "created_at": "2021-10-19 13:49:47",
+                "updated_at": "2021-10-19 13:56:51",
+                "idenify_id": "1"
+            },
+            "permiso": {
+                "Deleita": [
+                    "contactsModule",
+                    "contactsList",
+                    "contactDetail",
+                    "contactCreate",
+                    "contactImport",
+                    "contactEdit",
+                    "contactDelete",
+                    "contactAddToEvent",
+                    "eventsModule",
+                    "eventsBooking",
+                    "inboxxReviewList",
+                    "inboxxGbmList",
+                    "inboxxChatList",
+                    "inboxxGbmChatBotList",
+                    "listingSyncModule",
+                    "listingSyncSite",
+                    "listingSyncModule",
+                    "listingSyncGmb",
+                    "listingSyncModule",
+                    "listingSyncBizDir",
+                    "listingSyncModule",
+                    "listingSyncFacebook",
+                    "boxxStoreManualOrders"
+                ]
+            },
+            "calificacion": [],
+            "BUSINESS_CONFIG_SERVICES": true,
+            "BUSINESS_CONFIG_PAYMENTS": true,
+            "BUSINESS_CONFIG_SCHEDULE": true,
+            "BUSINESS_CONFIG_SOCIAL": true,
+            "BUSINESS_CONFIG_WEBSITE": true,
+            "BUSINESS_CONFIG_NOTIFICATIONS": false,
+            "USER_HAS_GMB_ACCOUNT": false,
+            "BUSINESS_CONFIG_GMB_STATUS": false
         }
     }
 }
@@ -580,9 +651,9 @@ Code `200`
 ### Data Params
 
 ```json
-	"container" : "required|string|in_list:logo,about,gallery",
-    "img" : "required|file|allowed_types:jpg,jpeg,jfif,pjpeg,pjp,png",
-    "index" : "numeric|required_if:container:gallery"
+	"container" : "required | string | in_list:logo,about,gallery",
+    "img" : "required | base64_encode",
+    "index" : "numeric | required_if: container=gallery"
     
 ```
 
@@ -636,8 +707,8 @@ Reason `Precondition Failed`
 ### Data Params
 
 ```json
-	"container" : "required|string|in_list:logo,about,gallery",
-    "index" : "numeric|required_if:container:gallery"
+	"container" : "required | string | in_list:logo,about,gallery",
+    "index" : "numeric | required_if: container=gallery"
     
 ```
 
@@ -722,7 +793,7 @@ Reason `Unauthorized`
 }
 ```
 
-<a name="disable-by-third-id"></a>
+<a name="disable-by"></a>
 ## Disable business by third id or email
 
 |Method|URI|Headers|
@@ -814,7 +885,7 @@ Reason `Unauthorized`
 ```
 ---
 
-<a name="enable-by-third-id"></a>
+<a name="enable-by"></a>
 ## Enable business by third_id or email
 
 |Method|URI|Headers|
@@ -905,7 +976,7 @@ Reason `Unauthorized`
 ```
 ---
 
-<a name="delete-by-third-id"></a>
+<a name="delete-by"></a>
 ## Delete business by third_id or email
 
 |Method|URI|Headers|
