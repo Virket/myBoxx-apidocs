@@ -65,7 +65,7 @@ Code `200`
                 "language": "spanish",
                 "account_status": "1"
             },
-            "suscripcion": {
+            "subscription": {
                 "id": "2",
                 "name": "Comienza",
                 "sku": "PQ1",
@@ -251,7 +251,7 @@ Code `200`
                 "language": "spanish",
                 "account_status": "1"
             },
-            "suscripcion": {
+            "subscription": {
                 "id": "2",
                 "name": "Comienza",
                 "sku": "PQ1",
@@ -260,7 +260,7 @@ Code `200`
                 "updated_at": "2021-10-19 13:50:34",
                 "idenify_id": "1"
             },
-            "permiso": {
+            "permissions": {
                 "Comienza": [
                     "contactsModule",
                     "contactsList",
@@ -279,16 +279,7 @@ Code `200`
                     "listingSyncModule",
                     "listingSyncBizDir"
                 ]
-            },
-            "calificacion": [],
-            "BUSINESS_CONFIG_SERVICES": false,
-            "BUSINESS_CONFIG_PAYMENTS": false,
-            "BUSINESS_CONFIG_SCHEDULE": false,
-            "BUSINESS_CONFIG_SOCIAL": false,
-            "BUSINESS_CONFIG_WEBSITE": false,
-            "BUSINESS_CONFIG_NOTIFICATIONS": false,
-            "USER_HAS_GMB_ACCOUNT": false,
-            "BUSINESS_CONFIG_GMB_STATUS": false
+            }
         }
     }
 }
@@ -380,7 +371,7 @@ Code `200`
                 "language": "spanish",
                 "account_status": "1"
             },
-            "suscripcion": {
+            "subscription": {
                 "id": "2",
                 "name": "Comienza",
                 "sku": "PQ1",
@@ -389,7 +380,7 @@ Code `200`
                 "updated_at": "2021-10-19 13:50:34",
                 "idenify_id": "1"
             },
-            "permiso": {
+            "permissions": {
                 "Comienza": [
                     "contactsModule",
                     "contactsList",
@@ -408,16 +399,7 @@ Code `200`
                     "listingSyncModule",
                     "listingSyncBizDir"
                 ]
-            },
-            "calificacion": [],
-            "BUSINESS_CONFIG_SERVICES": false,
-            "BUSINESS_CONFIG_PAYMENTS": false,
-            "BUSINESS_CONFIG_SCHEDULE": false,
-            "BUSINESS_CONFIG_SOCIAL": false,
-            "BUSINESS_CONFIG_WEBSITE": false,
-            "BUSINESS_CONFIG_NOTIFICATIONS": false,
-            "USER_HAS_GMB_ACCOUNT": false,
-            "BUSINESS_CONFIG_GMB_STATUS": false
+            }
         }
     }
 }
@@ -589,7 +571,7 @@ Code `200`
                 "language": "spanish",
                 "account_status": "1"
             },
-            "suscripcion": {
+            "subscription": {
                 "id": "4",
                 "name": "Deleita",
                 "sku": "PQ3",
@@ -598,7 +580,7 @@ Code `200`
                 "updated_at": "2021-10-19 13:56:51",
                 "idenify_id": "1"
             },
-            "permiso": {
+            "permissions": {
                 "Deleita": [
                     "contactsModule",
                     "contactsList",
@@ -624,16 +606,7 @@ Code `200`
                     "listingSyncFacebook",
                     "boxxStoreManualOrders"
                 ]
-            },
-            "calificacion": [],
-            "BUSINESS_CONFIG_SERVICES": true,
-            "BUSINESS_CONFIG_PAYMENTS": true,
-            "BUSINESS_CONFIG_SCHEDULE": true,
-            "BUSINESS_CONFIG_SOCIAL": true,
-            "BUSINESS_CONFIG_WEBSITE": true,
-            "BUSINESS_CONFIG_NOTIFICATIONS": false,
-            "USER_HAS_GMB_ACCOUNT": false,
-            "BUSINESS_CONFIG_GMB_STATUS": false
+            }
         }
     }
 }
