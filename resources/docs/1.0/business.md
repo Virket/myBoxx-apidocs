@@ -41,6 +41,8 @@ Use this document reference to manage businesess.
     "brand_id" : "required",
     "third_id" : "string"
     "sku" : "string"
+    "ecwid_store_id" : "string"
+    "external_subscription_id" : "string"
 ```
 
 > {success} Success Response
@@ -240,6 +242,8 @@ Code `200`
             "full_address": "",
             "images": [],
             "country_calling_code": "52",
+            "external_subscription_id": "s-047ab",
+            "ecwid_store_id": "6721cda",
             "site_url": "http://exampledomain.com"
         },
         "meta": {
@@ -360,6 +364,8 @@ Code `200`
             "full_address": "",
             "images": [],
             "country_calling_code": "52",
+            "external_subscription_id": "s-047ab",
+            "ecwid_store_id": "6721cda",
             "site_url": "http://exampledomain.com"
         },
         "meta": {
@@ -441,6 +447,8 @@ Reason `Not found`
     "third_id" : "string"
     "domain" : "string"
     "sku" : "string"
+    "ecwid_store_id" : "string"
+    "external_subscription_id" : "string"
     "phone" : "numeric",
     "mobile_phone" : "numeric",
     "street_address" : "string",
@@ -560,6 +568,8 @@ Code `200`
             "state": "Puebla",
             "country": "México",
             "template_id": "30",
+            "external_subscription_id": "s-047ab",
+            "ecwid_store_id": "6721cda",
             "site_url": "https://devmultisites.virket.agency/mexico/puebla/tehuacan/las-flores/estudio-fotografico-cris"
         },
         "meta": {
