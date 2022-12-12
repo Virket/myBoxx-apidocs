@@ -243,7 +243,7 @@ Code `200`
             "images": [],
             "country_calling_code": "52",
             "external_subscription_id": "s-047ab",
-            "ecwid_store_id": "6721cda",
+            "ecwid_store_id": "123456",
             "site_url": "http://exampledomain.com"
         },
         "meta": {
@@ -256,34 +256,16 @@ Code `200`
                 "account_status": "1"
             },
             "subscription": {
-                "id": "2",
-                "name": "Comienza",
-                "sku": "PQ1",
-                "type": "brand",
-                "created_at": "2021-10-19 13:47:01",
-                "updated_at": "2021-10-19 13:50:34",
-                "idenify_id": "1"
+                "id": "82",
+                "business_id": "47",
+                "plan_id": "1",
+                "sku": "VIRKET_GSTORE_BASIC"
             },
-            "permissions": {
-                "Comienza": [
-                    "contactsModule",
-                    "contactsList",
-                    "contactDetail",
-                    "contactCreate",
-                    "contactImport",
-                    "contactEdit",
-                    "contactDelete",
-                    "contactAddToEvent",
-                    "eventsModule",
-                    "inboxxReviewList",
-                    "listingSyncModule",
-                    "listingSyncSite",
-                    "listingSyncModule",
-                    "listingSyncGmb",
-                    "listingSyncModule",
-                    "listingSyncBizDir"
-                ]
-            }
+            "permissions": [
+                "gmb",
+                "shop",
+                "crm"
+            ]
         }
     }
 }
@@ -365,7 +347,7 @@ Code `200`
             "images": [],
             "country_calling_code": "52",
             "external_subscription_id": "s-047ab",
-            "ecwid_store_id": "6721cda",
+            "ecwid_store_id": "123456",
             "site_url": "http://exampledomain.com"
         },
         "meta": {
@@ -378,34 +360,16 @@ Code `200`
                 "account_status": "1"
             },
             "subscription": {
-                "id": "2",
-                "name": "Comienza",
-                "sku": "PQ1",
-                "type": "brand",
-                "created_at": "2021-10-19 13:47:01",
-                "updated_at": "2021-10-19 13:50:34",
-                "idenify_id": "1"
+                "id": "82",
+                "business_id": "47",
+                "plan_id": "1",
+                "sku": "VIRKET_GSTORE_BASIC"
             },
-            "permissions": {
-                "Comienza": [
-                    "contactsModule",
-                    "contactsList",
-                    "contactDetail",
-                    "contactCreate",
-                    "contactImport",
-                    "contactEdit",
-                    "contactDelete",
-                    "contactAddToEvent",
-                    "eventsModule",
-                    "inboxxReviewList",
-                    "listingSyncModule",
-                    "listingSyncSite",
-                    "listingSyncModule",
-                    "listingSyncGmb",
-                    "listingSyncModule",
-                    "listingSyncBizDir"
-                ]
-            }
+            "permissions": [
+                "gmb",
+                "shop",
+                "crm"
+            ]
         }
     }
 }
@@ -569,7 +533,7 @@ Code `200`
             "country": "México",
             "template_id": "30",
             "external_subscription_id": "s-047ab",
-            "ecwid_store_id": "6721cda",
+            "ecwid_store_id": "123456",
             "site_url": "https://devmultisites.virket.agency/mexico/puebla/tehuacan/las-flores/estudio-fotografico-cris"
         },
         "meta": {
