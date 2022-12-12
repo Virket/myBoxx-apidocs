@@ -4,6 +4,7 @@
     - [Partner](/{{route}}/{{version}}/partner)
     - [Brand](/{{route}}/{{version}}/brand)
     - [Business](/{{route}}/{{version}}/business)
+    - [Store](/{{route}}/{{version}}/store)
 - ## GMB Agency
     - [GMB](/{{route}}/{{version}}/gmb)
 - ## MIT
