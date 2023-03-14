@@ -1,15 +1,19 @@
 # Partner Documentation
 
-Use this document reference to manage partners.
+Use this document reference to manage get your partner data.
 
 ---
 
 - [Partner](#partner)
+<!---
 	- [Create](#create)
 	- [List](#list)
 	- [Get](#single)
+-->
   - [Get API Token](#external_login)
 
+
+<!---
 <a name="create"></a>
 ## Create new Parter
 
@@ -155,8 +159,7 @@ Code `200`
 }
 ```
 
--
-
+-->
 <a name="external_login"></a>
 ## Get API Token
 

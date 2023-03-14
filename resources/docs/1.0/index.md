@@ -7,8 +7,11 @@
     - [Store](/{{route}}/{{version}}/store)
 - ## GMB Agency
     - [GMB](/{{route}}/{{version}}/gmb)
+    
+<!---
 - ## MIT
     - [Set Data](/{{route}}/{{version}}/mit)
+-->
 - ## Ecwid
     - [Auth](/{{route}}/{{version}}/eauth)
     - [Products](/{{route}}/{{version}}/eproducts)
